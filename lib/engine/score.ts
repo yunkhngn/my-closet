@@ -12,7 +12,9 @@ function jaccard(a: string[], b: string[]): number {
   const setB = new Set(b);
   if (setA.size === 0 && setB.size === 0) return 0;
   let inter = 0;
-  for (const x of setA) if (setB.has(x)) inter++;
+  setA.forEach((x) => {
+    if (setB.has(x)) inter++;
+  });
   const union = setA.size + setB.size - inter;
   return union === 0 ? 0 : inter / union;
 }
