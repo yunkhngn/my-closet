@@ -71,3 +71,62 @@ export function subscribeOutfits(
     onChange(snap.docs.map((d) => ({ id: d.id, ...d.data() }) as Outfit));
   });
 }
+
+export async function seedCloset(uid: string): Promise<void> {
+  const sampleItems: NewItem[] = [
+    {
+      type: 'ao_khoac',
+      name: 'Black Denim Jacket',
+      colors: ['black'],
+      styleTags: ['casual', 'streetwear'],
+      formality: 2,
+      imageUrl: 'https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=500',
+      imagePublicId: 'mock_denim_jacket',
+      occasions: ['casual', 'hangout'],
+    },
+    {
+      type: 'ao',
+      name: 'White Cotton Tee',
+      colors: ['white'],
+      styleTags: ['casual', 'minimalist'],
+      formality: 1,
+      imageUrl: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500',
+      imagePublicId: 'mock_white_tee',
+      occasions: ['casual', 'hangout'],
+    },
+    {
+      type: 'quan',
+      name: 'Blue Raw Denim Jeans',
+      colors: ['blue'],
+      styleTags: ['casual', 'classic'],
+      formality: 2,
+      imageUrl: 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=500',
+      imagePublicId: 'mock_blue_jeans',
+      occasions: ['casual', 'work'],
+    },
+    {
+      type: 'giay',
+      name: 'White Canvas Sneakers',
+      colors: ['white'],
+      styleTags: ['casual', 'sporty'],
+      formality: 1,
+      imageUrl: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=500',
+      imagePublicId: 'mock_sneakers',
+      occasions: ['casual', 'hangout'],
+    },
+    {
+      type: 'phu_kien',
+      name: 'Leather Strap Watch',
+      colors: ['brown', 'black'],
+      styleTags: ['classic', 'smart'],
+      formality: 3,
+      imageUrl: 'https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?w=500',
+      imagePublicId: 'mock_watch',
+      occasions: ['work', 'formal'],
+    },
+  ];
+
+  for (const item of sampleItems) {
+    await addItem(uid, item);
+  }
+}

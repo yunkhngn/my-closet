@@ -19,7 +19,8 @@ export function ItemsProvider({ children }: { children: React.ReactNode }) {
       unsubItems();
       unsubOutfits();
     };
-  }, [uid, setItems, setOutfits]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [uid]);
 
   return <>{children}</>;
 }

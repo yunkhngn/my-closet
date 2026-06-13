@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { useShallow } from 'zustand/react/shallow';
 import { useItemsStore } from '@/store/items';
 import { useBuilderStore } from '@/store/builder';
 import { SLOT_CONFIG, type ClothingType } from '@/types';
@@ -8,8 +9,8 @@ import { Button } from '@/components/ui/button';
 
 export function SlotPicker({ slot }: { slot: ClothingType }) {
   const meta = SLOT_CONFIG[slot];
-  const items = useItemsStore((s) => s.items.filter((i) => i.type === slot));
-  const selected = useBuilderStore((s) => s.selection[slot] ?? []);
+  const items = useItemsStore(useShallow((s) => s.items.filter((i) => i.type === slot)));
+  const selected = useBuilderStore(useShallow((s) => s.selection[slot] ?? []));
   const { setSlot, addToSlot, clearSlot } = useBuilderStore();
 
   const choose = (id: string) => {
