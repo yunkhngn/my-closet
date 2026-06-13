@@ -18,9 +18,13 @@ export function deriveFilterOptions(items: Item[]): FilterOptions {
     item.occasions?.forEach((o) => occasions.add(o));
     item.styleTags.forEach((s) => styleTags.add(s));
   }
+  const occArr: string[] = [];
+  occasions.forEach((o) => occArr.push(o));
+  const styleArr: string[] = [];
+  styleTags.forEach((s) => styleArr.push(s));
   return {
-    occasions: [...occasions].sort(),
-    styleTags: [...styleTags].sort(),
+    occasions: occArr.sort(),
+    styleTags: styleArr.sort(),
   };
 }
 
