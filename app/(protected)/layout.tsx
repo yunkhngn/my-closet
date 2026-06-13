@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/store/auth';
+import { ItemsProvider } from '@/components/items-provider';
 
 export default function ProtectedLayout({
   children,
@@ -39,5 +40,5 @@ export default function ProtectedLayout({
   const allowedEmail = process.env.NEXT_PUBLIC_ALLOW_EMAIL;
   if (!user || (allowedEmail && user.email !== allowedEmail)) return null;
 
-  return <>{children}</>;
+  return <ItemsProvider>{children}</ItemsProvider>;
 }
