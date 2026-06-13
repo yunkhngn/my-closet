@@ -13,7 +13,19 @@ export default function ProtectedLayout({
   const { user, loading } = useAuthStore();
 
   useEffect(() => {
-    if (!loading && !user) router.replace('/signin');
+    if (!loading) {
+      if (!user) {
+        router.replace('/signin');
+      } else {
+        const allowedEmail = process.env.NEXT_PUBLIC_ALLOW_EMAIL;
+        if (allowedEmail && user.email !== allowedEmail) {
+          import('@/lib/auth-actions').then(({ signOut }) => {
+            signOut();
+            router.replace('/signin?error=unauthorized');
+          });
+        }
+      }
+    }
   }, [user, loading, router]);
 
   if (loading) {
@@ -23,7 +35,9 @@ export default function ProtectedLayout({
       </div>
     );
   }
-  if (!user) return null; // redirect in flight
+
+  const allowedEmail = process.env.NEXT_PUBLIC_ALLOW_EMAIL;
+  if (!user || (allowedEmail && user.email !== allowedEmail)) return null;
 
   return <>{children}</>;
 }
