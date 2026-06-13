@@ -40,3 +40,8 @@ docs/
 wardrobe-spec.md
 .worktrees/
 
+# next-pwa generated artifacts
+public/sw.js
+public/sw.js.map
+public/workbox-*.js
+public/workbox-*.js.map
