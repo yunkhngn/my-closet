@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { useAuthStore } from '@/store/auth';
 import { signOut } from '@/lib/auth-actions';
@@ -17,6 +18,9 @@ export default function HomePage() {
           <span className="hidden text-muted-foreground sm:inline">
             {user?.displayName}
           </span>
+          <Button variant="ghost" size="sm" render={<Link href="/build" />}>
+            Build
+          </Button>
           <ItemForm trigger={<Button size="sm">Add item</Button>} />
           <Button variant="outline" size="sm" onClick={() => signOut()}>
             Sign out

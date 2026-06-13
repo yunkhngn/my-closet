@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { suggest, type ScoredOutfit } from '@/lib/engine/suggest';
+import { suggest } from '@/lib/engine/suggest';
 import type { Item, ClothingType } from '@/types';
 
 const mk = (
