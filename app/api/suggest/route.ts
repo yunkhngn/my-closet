@@ -25,7 +25,7 @@ export async function POST(req: Request) {
   try {
     const genAI = new GoogleGenerativeAI(key);
     const model = genAI.getGenerativeModel({
-      model: 'gemini-1.5-flash',
+      model: 'gemini-3.5-flash',
       generationConfig: { responseMimeType: 'application/json' },
     });
     const prompt = buildPrompt(body.wardrobe, body.context);
