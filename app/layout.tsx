@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { AuthProvider } from "@/components/auth-provider";
@@ -18,6 +18,12 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: 'Wardrobe',
   description: 'Personal wardrobe digitizer + outfit suggester',
+  manifest: '/manifest.json',
+  appleWebApp: { capable: true, title: 'Wardrobe', statusBarStyle: 'default' },
+};
+
+export const viewport: Viewport = {
+  themeColor: '#ffffff',
 };
 
 export default function RootLayout({
