@@ -30,13 +30,13 @@ describe('validateDraft', () => {
     expect(validateDraft(base)).toEqual([]);
   });
   it('requires a name', () => {
-    expect(validateDraft({ ...base, name: '  ' })).toContain('name');
+    expect(validateDraft({ ...base, name: '  ' })).toContain('tên');
   });
   it('requires at least one color', () => {
-    expect(validateDraft({ ...base, colors: [] })).toContain('colors');
+    expect(validateDraft({ ...base, colors: [] })).toContain('màu sắc');
   });
   it('rejects formality outside 1–5', () => {
-    expect(validateDraft({ ...base, formality: 0 })).toContain('formality');
-    expect(validateDraft({ ...base, formality: 6 })).toContain('formality');
+    expect(validateDraft({ ...base, formality: 0 })).toContain('mức độ trang trọng');
+    expect(validateDraft({ ...base, formality: 6 })).toContain('mức độ trang trọng');
   });
 });
