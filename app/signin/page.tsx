@@ -29,12 +29,12 @@ export default function SignInPage() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center gap-6 p-8">
-      <h1 className="text-2xl font-semibold">Wardrobe</h1>
-      <p className="text-sm text-muted-foreground">Sign in to your closet.</p>
-      <Button onClick={() => signInWithGoogle()}>Continue with Google</Button>
+      <h1 className="text-2xl font-semibold">Tủ Quần Áo</h1>
+      <p className="text-sm text-muted-foreground">Đăng nhập vào tủ đồ của bạn.</p>
+      <Button onClick={() => signInWithGoogle()}>Tiếp tục với Google</Button>
       {isUnauthorized && (
         <p className="text-sm text-destructive mt-2">
-          Unauthorized account. Please sign in with the owner email.
+          Tài khoản không được phép. Vui lòng đăng nhập bằng email của chủ sở hữu.
         </p>
       )}
     </main>

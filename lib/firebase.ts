@@ -21,7 +21,7 @@ if (process.env.NODE_ENV === 'development' && typeof window !== 'undefined') {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const g = window as any;
   if (!g._firebaseEmulatorsConnected) {
-    connectAuthEmulator(auth, 'http://localhost:9099');
+    connectAuthEmulator(auth, 'http://localhost:9099', { disableWarnings: true });
     connectFirestoreEmulator(db, 'localhost', 8080);
     g._firebaseEmulatorsConnected = true;
   }

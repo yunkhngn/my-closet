@@ -16,10 +16,10 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: 'Wardrobe',
-  description: 'Personal wardrobe digitizer + outfit suggester',
+  title: 'Tủ Quần Áo',
+  description: 'Số hóa tủ quần áo cá nhân + gợi ý trang phục',
   manifest: '/manifest.json',
-  appleWebApp: { capable: true, title: 'Wardrobe', statusBarStyle: 'default' },
+  appleWebApp: { capable: true, title: 'Tủ Quần Áo', statusBarStyle: 'default' },
 };
 
 export const viewport: Viewport = {
@@ -32,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn("font-sans", geistSans.variable, geistMono.variable)}>
+    <html lang="vi" className={cn("font-sans", geistSans.variable, geistMono.variable)}>
       <body className="antialiased">
         <AuthProvider>{children}</AuthProvider>
       </body>

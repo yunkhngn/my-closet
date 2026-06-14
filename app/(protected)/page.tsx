@@ -28,23 +28,23 @@ export default function HomePage() {
   return (
     <main className="mx-auto max-w-5xl p-6">
       <header className="flex items-center justify-between">
-        <h1 className="text-xl font-semibold">My Closet</h1>
+        <h1 className="text-xl font-semibold">Tủ Đồ Của Tôi</h1>
         <div className="flex items-center gap-3 text-sm">
           <span className="hidden text-muted-foreground sm:inline">
             {user?.displayName}
           </span>
           <Button variant="ghost" size="sm" render={<Link href="/build" />}>
-            Build
+            Tạo Outfit
           </Button>
           <Button variant="ghost" size="sm" render={<Link href="/outfits" />}>
-            Saved
+            Đã Lưu
           </Button>
-          <ItemForm trigger={<Button size="sm">Add item</Button>} />
+          <ItemForm trigger={<Button size="sm">Thêm đồ</Button>} />
           <Button variant="outline" size="sm" onClick={handleSeed} disabled={seeding}>
-            {seeding ? 'Seeding...' : 'Seed'}
+            {seeding ? 'Đang thêm mẫu...' : 'Thêm mẫu'}
           </Button>
           <Button variant="outline" size="sm" onClick={() => signOut()}>
-            Sign out
+            Đăng xuất
           </Button>
         </div>
       </header>

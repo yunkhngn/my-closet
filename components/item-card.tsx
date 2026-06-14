@@ -30,7 +30,7 @@ export function ItemCard({ item }: { item: Item }) {
             existing={item}
             trigger={
               <Button variant="ghost" size="sm" className="h-7 px-2 text-xs">
-                Edit
+                Sửa
               </Button>
             }
           />
@@ -39,10 +39,10 @@ export function ItemCard({ item }: { item: Item }) {
             size="sm"
             className="h-7 px-2 text-xs text-destructive hover:text-destructive"
             onClick={() => {
-              if (confirm(`Delete "${item.name}"?`)) deleteItem(uid, item.id);
+              if (confirm(`Xóa "${item.name}"?`)) deleteItem(uid, item.id);
             }}
           >
-            Delete
+            Xóa
           </Button>
         </div>
       </div>

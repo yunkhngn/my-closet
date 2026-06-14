@@ -46,11 +46,11 @@ export interface SlotMeta {
 }
 
 export const SLOT_CONFIG: Record<ClothingType, SlotMeta> = {
-  ao_khoac: { required: false, multiple: false, label: 'Outerwear' },
-  ao: { required: true, multiple: false, label: 'Top' },
-  quan: { required: true, multiple: false, label: 'Bottom' },
-  giay: { required: true, multiple: false, label: 'Shoes' },
-  phu_kien: { required: false, multiple: true, label: 'Accessory' },
+  ao_khoac: { required: false, multiple: false, label: 'Áo Khoác' },
+  ao: { required: true, multiple: false, label: 'Áo' },
+  quan: { required: true, multiple: false, label: 'Quần' },
+  giay: { required: true, multiple: false, label: 'Giày' },
+  phu_kien: { required: false, multiple: true, label: 'Phụ Kiện' },
 };
 
 export function isClothingType(value: string): value is ClothingType {

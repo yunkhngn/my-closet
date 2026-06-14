@@ -14,15 +14,15 @@ export default function BuildPage() {
     <main className="mx-auto max-w-3xl space-y-6 p-6">
       <header className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">Build an Outfit</h1>
-          <p className="text-sm text-muted-foreground mt-1">Mix and match slots or generate recommendations.</p>
+          <h1 className="text-2xl font-bold tracking-tight">Tạo Trang Phục</h1>
+          <p className="text-sm text-muted-foreground mt-1">Kết hợp các vị trí hoặc tạo gợi ý trang phục.</p>
         </div>
         <div className="flex gap-2 text-sm">
           <Button variant="outline" size="sm" render={<Link href="/" />}>
-            Closet
+            Tủ Đồ
           </Button>
           <Button variant="outline" size="sm" render={<Link href="/outfits" />}>
-            Saved
+            Đã Lưu
           </Button>
         </div>
       </header>

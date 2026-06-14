@@ -42,12 +42,12 @@ export function SlotPicker({ slot }: { slot: ClothingType }) {
         </h3>
         {selected.length > 0 && (
           <Button variant="ghost" size="sm" className="h-7 px-2 text-xs" onClick={() => clearSlot(slot)}>
-            Clear
+            Xóa
           </Button>
         )}
       </div>
       {items.length === 0 ? (
-        <p className="text-xs text-muted-foreground italic">No {meta.label.toLowerCase()} items yet.</p>
+        <p className="text-xs text-muted-foreground italic">Chưa có đồ {meta.label.toLowerCase()} nào.</p>
       ) : (
         <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-none snap-x">
           {items.map((item) => {

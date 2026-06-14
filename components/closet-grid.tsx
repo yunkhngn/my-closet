@@ -9,14 +9,14 @@ export function ClosetGrid() {
   const groups = byType();
 
   if (loading) {
-    return <p className="mt-8 text-sm text-muted-foreground">Loading closet…</p>;
+    return <p className="mt-8 text-sm text-muted-foreground">Đang tải tủ đồ…</p>;
   }
 
   const hasAny = CLOTHING_TYPES.some((t) => groups[t].length > 0);
   if (!hasAny) {
     return (
       <p className="mt-8 text-sm text-muted-foreground">
-        Your closet is empty. Add your first item.
+        Tủ đồ của bạn trống. Thêm món đồ đầu tiên.
       </p>
     );
   }

@@ -46,15 +46,15 @@ export function OutfitBuilder({ filter }: { filter: Filter }) {
         setSuggestions(suggest(subset, { topN: 6 }));
         setAiNote(
           error
-            ? `${error} — showing Quick suggestions instead.`
-            : 'AI returned nothing — showing Quick suggestions instead.',
+            ? `${error} — hiển thị gợi ý nhanh thay thế.`
+            : 'AI không trả về kết quả — hiển thị gợi ý nhanh thay thế.',
         );
       } else {
         setSuggestions(outfits.map((o) => ({ items: o.items, score: 1, reason: o.reason })));
       }
     } catch {
       setSuggestions(suggest(subset, { topN: 6 }));
-      setAiNote('AI failed — showing Quick suggestions instead.');
+      setAiNote('AI gặp lỗi — hiển thị gợi ý nhanh thay thế.');
     } finally {
       setAiBusy(false);
     }
@@ -69,11 +69,11 @@ export function OutfitBuilder({ filter }: { filter: Filter }) {
         source,
         occasion: filter.occasion,
       });
-      setSaved('Saved successfully!');
+      setSaved('Đã lưu thành công!');
       setTimeout(() => setSaved(null), 3000);
     } catch (error) {
       console.error('Failed to save outfit:', error);
-      setSaved('Failed to save.');
+      setSaved('Lưu thất bại.');
     } finally {
       setIsSaving(false);
     }
@@ -86,7 +86,7 @@ export function OutfitBuilder({ filter }: { filter: Filter }) {
     <div className="space-y-8">
       <div className="space-y-5 rounded-xl border p-4 bg-card shadow-sm">
         <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">
-          Closet Slots
+          Ngăn Tủ Đồ
         </h2>
         {CLOTHING_TYPES.map((slot) => (
           <SlotPicker key={slot} slot={slot} />
@@ -95,10 +95,10 @@ export function OutfitBuilder({ filter }: { filter: Filter }) {
 
       <div className="space-y-2">
         <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-          Style Prompts & Occasions (AI)
+          Gợi ý phong cách & Dịp (AI)
         </label>
         <Textarea
-          placeholder="Optional: describe the style, vibe, or specific occasion (e.g. 'smart casual for a coffee meeting')"
+          placeholder="Tùy chọn: mô tả phong cách, cảm giác hoặc dịp cụ thể (vd: 'lịch sự nhẹ cho buổi cà phê')"
           value={context}
           onChange={(e) => setContext(e.target.value)}
           rows={2}
@@ -108,10 +108,10 @@ export function OutfitBuilder({ filter }: { filter: Filter }) {
 
       <div className="flex flex-wrap items-center gap-3">
         <Button onClick={quickSuggest} variant="outline" className="shadow-sm">
-          Quick suggest
+          Gợi ý nhanh
         </Button>
         <Button variant="default" onClick={askAi} disabled={aiBusy} className="shadow-sm">
-          {aiBusy ? 'Asking AI…' : 'Ask AI'}
+          {aiBusy ? 'Đang hỏi AI…' : 'Hỏi AI'}
         </Button>
         <Button
           variant="outline"
@@ -119,7 +119,7 @@ export function OutfitBuilder({ filter }: { filter: Filter }) {
           onClick={() => save(manualRefs, 'manual')}
           className="shadow-sm"
         >
-          {isSaving ? 'Saving...' : 'Save current outfit'}
+          {isSaving ? 'Đang lưu...' : 'Lưu outfit hiện tại'}
         </Button>
         {saved && <span className="text-sm font-medium text-emerald-600 animate-in fade-in duration-200">{saved}</span>}
       </div>
@@ -127,18 +127,18 @@ export function OutfitBuilder({ filter }: { filter: Filter }) {
       {suggestions.length > 0 && (
         <div className="space-y-4">
           <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-            Suggestions
+            Gợi ý
           </h2>
           <div className="grid gap-4 sm:grid-cols-2">
             {suggestions.map((s, i) => (
               <OutfitCard
                 key={i}
                 refs={s.items}
-                reason={s.reason ?? `Match score ${(s.score * 100).toFixed(0)}%`}
+                reason={s.reason ?? `Điểm phù hợp ${(s.score * 100).toFixed(0)}%`}
                 footer={
                   <div className="flex gap-2">
                     <Button size="sm" variant="outline" className="h-8 text-xs" onClick={() => loadRefs(s.items)}>
-                      Edit
+                      Chỉnh sửa
                     </Button>
                     <Button
                       size="sm"
@@ -146,7 +146,7 @@ export function OutfitBuilder({ filter }: { filter: Filter }) {
                       className="h-8 text-xs"
                       onClick={() => save(s.items, s.reason ? 'ai' : 'algo')}
                     >
-                      Save
+                      Lưu
                     </Button>
                   </div>
                 }

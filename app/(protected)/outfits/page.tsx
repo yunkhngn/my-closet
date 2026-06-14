@@ -17,18 +17,18 @@ export default function OutfitsPage() {
     <main className="mx-auto max-w-3xl space-y-6 p-6">
       <header className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">Saved Outfits</h1>
-          <p className="text-sm text-muted-foreground mt-1">Browse your liked styles and recommendations.</p>
+          <h1 className="text-2xl font-bold tracking-tight">Outfit Đã Lưu</h1>
+          <p className="text-sm text-muted-foreground mt-1">Xem các bộ trang phục yêu thích và gợi ý của bạn.</p>
         </div>
         <Button variant="outline" size="sm" render={<Link href="/build" />}>
-          Build
+          Tạo Outfit
         </Button>
       </header>
 
       {loading ? (
-        <p className="text-sm text-muted-foreground italic">Loading...</p>
+        <p className="text-sm text-muted-foreground italic">Đang tải...</p>
       ) : outfits.length === 0 ? (
-        <p className="text-sm text-muted-foreground italic">No saved outfits yet.</p>
+        <p className="text-sm text-muted-foreground italic">Chưa có outfit nào được lưu.</p>
       ) : (
         <div className="grid gap-4 sm:grid-cols-2">
           {outfits.map((o) => {
@@ -55,7 +55,7 @@ export default function OutfitsPage() {
                       if (isConfirming) setConfirmDeleteId(null);
                     }}
                   >
-                    {isConfirming ? 'Confirm' : 'Delete'}
+                    {isConfirming ? 'Xác nhận' : 'Xóa'}
                   </Button>
                 }
               />

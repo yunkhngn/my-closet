@@ -1,7 +1,7 @@
 {
-  "name": "Wardrobe",
-  "short_name": "Wardrobe",
-  "description": "Personal wardrobe digitizer + outfit suggester",
+  "name": "Tủ Quần Áo",
+  "short_name": "Tủ Đồ",
+  "description": "Số hóa tủ quần áo cá nhân + gợi ý trang phục",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

@@ -45,11 +45,11 @@ export function ItemForm({
     setError(null);
     const problems = validateDraft(draft);
     if (problems.length) {
-      setError(`Please fix: ${problems.join(', ')}`);
+      setError(`Vui lòng điền đúng: ${problems.join(', ')}`);
       return;
     }
     if (!existing && !file) {
-      setError('Please choose an image.');
+      setError('Vui lòng chọn một hình ảnh.');
       return;
     }
     setBusy(true);
@@ -65,7 +65,7 @@ export function ItemForm({
       else await addItem(uid, payload);
       setOpen(false);
     } catch (e) {
-      setError(e instanceof Error ? e.message : 'Save failed');
+      setError(e instanceof Error ? e.message : 'Lưu thất bại');
     } finally {
       setBusy(false);
     }
@@ -76,12 +76,12 @@ export function ItemForm({
       <DialogTrigger render={trigger} />
       <DialogContent className="max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>{existing ? 'Edit item' : 'Add item'}</DialogTitle>
+          <DialogTitle>{existing ? 'Chỉnh sửa đồ' : 'Thêm đồ'}</DialogTitle>
         </DialogHeader>
 
         <div className="grid gap-4 py-2">
           <div className="grid gap-1.5">
-            <Label htmlFor="type">Type</Label>
+            <Label htmlFor="type">Loại</Label>
             <select
               id="type"
               className="h-9 rounded-md border px-2 text-sm bg-background text-foreground"
@@ -99,7 +99,7 @@ export function ItemForm({
           </div>
 
           <div className="grid gap-1.5">
-            <Label htmlFor="name">Name</Label>
+            <Label htmlFor="name">Tên</Label>
             <Input
               id="name"
               value={draft.name}
@@ -108,7 +108,7 @@ export function ItemForm({
           </div>
 
           <div className="grid gap-1.5">
-            <Label htmlFor="colors">Colors (comma-separated)</Label>
+            <Label htmlFor="colors">Màu sắc (phân cách bằng dấu phẩy)</Label>
             <Input
               id="colors"
               defaultValue={draft.colors.join(', ')}
@@ -119,7 +119,7 @@ export function ItemForm({
           </div>
 
           <div className="grid gap-1.5">
-            <Label htmlFor="style">Style tags (comma-separated)</Label>
+            <Label htmlFor="style">Thẻ phong cách (phân cách bằng dấu phẩy)</Label>
             <Input
               id="style"
               defaultValue={draft.styleTags.join(', ')}
@@ -130,7 +130,7 @@ export function ItemForm({
           </div>
 
           <div className="grid gap-1.5">
-            <Label htmlFor="formality">Formality (1–5)</Label>
+            <Label htmlFor="formality">Mức độ trang trọng (1–5)</Label>
             <Input
               id="formality"
               type="number"
@@ -144,7 +144,7 @@ export function ItemForm({
           </div>
 
           <div className="grid gap-1.5">
-            <Label htmlFor="occasions">Occasions (optional, comma-separated)</Label>
+            <Label htmlFor="occasions">Dịp (tùy chọn, phân cách bằng dấu phẩy)</Label>
             <Input
               id="occasions"
               defaultValue={(draft.occasions ?? []).join(', ')}
@@ -155,7 +155,7 @@ export function ItemForm({
           </div>
 
           <div className="grid gap-1.5">
-            <Label htmlFor="image">Image</Label>
+            <Label htmlFor="image">Hình ảnh</Label>
             <Input
               id="image"
               type="file"
@@ -168,7 +168,7 @@ export function ItemForm({
           {error && <p className="text-sm text-red-600">{error}</p>}
 
           <Button onClick={handleSave} disabled={busy}>
-            {busy ? 'Saving…' : 'Save'}
+            {busy ? 'Đang lưu…' : 'Lưu'}
           </Button>
         </div>
       </DialogContent>
