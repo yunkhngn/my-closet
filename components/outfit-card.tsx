@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useItemsStore } from '@/store/items';
 import { CLOTHING_TYPES, SLOT_CONFIG, type OutfitItemRef } from '@/types';
+import { portraitUrl } from '@/lib/cloudinary-url';
 
 export function OutfitCard({
   refs,
@@ -28,9 +29,9 @@ export function OutfitCard({
           return (
             <div key={`${ref.slot}-${ref.itemId}`} className="w-24 shrink-0">
               <div className="relative aspect-[3/4] overflow-hidden rounded-md bg-muted">
-                {item?.imageUrl && (
+                {item?.imagePublicId && (
                   <Image
-                    src={item.imageUrl}
+                    src={portraitUrl(item.imagePublicId, 96)}
                     alt={item.name}
                     fill
                     sizes="96px"

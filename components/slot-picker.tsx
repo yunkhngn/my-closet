@@ -7,6 +7,7 @@ import { useBuilderStore } from '@/store/builder';
 import { SLOT_CONFIG, type ClothingType } from '@/types';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { portraitUrl } from '@/lib/cloudinary-url';
 
 export function SlotPicker({ slot }: { slot: ClothingType }) {
   const meta = SLOT_CONFIG[slot];
@@ -78,9 +79,9 @@ export function SlotPicker({ slot }: { slot: ClothingType }) {
                 title={item.name}
               >
                 <div className="relative h-full w-full bg-muted">
-                  {item.imageUrl && (
+                  {item.imagePublicId && (
                     <Image
-                      src={item.imageUrl}
+                      src={portraitUrl(item.imagePublicId, 76)}
                       alt={item.name}
                       fill
                       sizes="76px"

@@ -3,6 +3,7 @@
 import { useItemsStore } from '@/store/items';
 import { deriveFilterOptions, type Filter } from '@/lib/filter';
 import { Button } from '@/components/ui/button';
+import { tagLabel, STYLE_SUGGESTIONS } from '@/lib/style-tags';
 
 const selectClass =
   'h-8 rounded border border-border/70 bg-card px-3 text-sm text-foreground shadow-none transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring hover:border-border';
@@ -15,7 +16,8 @@ export function FilterBar({
   onChange: (f: Filter) => void;
 }) {
   const items = useItemsStore((s) => s.items);
-  const { occasions, styleTags } = deriveFilterOptions(items);
+  const { occasions, styleTags: rawStyleTags } = deriveFilterOptions(items);
+  const styleTags = rawStyleTags.filter((s) => STYLE_SUGGESTIONS.includes(s));
   const hasFilter = filter.occasion || filter.styleTag || filter.maxFormality;
 
   return (
@@ -47,7 +49,7 @@ export function FilterBar({
         >
           <option value="">Tất cả</option>
           {styleTags.map((s) => (
-            <option key={s} value={s}>{s}</option>
+            <option key={s} value={s}>{tagLabel(s)}</option>
           ))}
         </select>
       </label>

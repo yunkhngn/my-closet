@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { useAuthStore } from '@/store/auth';
 import { deleteItem } from '@/lib/db';
+import { portraitUrl } from '@/lib/cloudinary-url';
 import { ItemForm } from '@/components/item-form';
 import { Button } from '@/components/ui/button';
 import type { Item } from '@/types';
@@ -24,9 +25,9 @@ export function ItemCard({ item }: { item: Item }) {
     <>
       <div className="group card-hover-shadow relative overflow-hidden rounded-lg border border-border/60 bg-card">
         <div className="relative aspect-[3/4] overflow-hidden bg-muted">
-          {item.imageUrl && (
+          {item.imagePublicId && (
             <Image
-              src={item.imageUrl}
+              src={portraitUrl(item.imagePublicId, 220)}
               alt={item.name}
               fill
               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 220px"
