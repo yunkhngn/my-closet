@@ -52,6 +52,10 @@
     --sidebar-accent-foreground: oklch(22% 0.015 255);
     --sidebar-border: oklch(90% 0.01 65);
     --sidebar-ring: oklch(52% 0.03 255);
+
+    /* Easing curves */
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
   }
 
   .dark {
@@ -95,5 +99,101 @@
 
   html {
     @apply font-sans;
+    font-size: 200%; /* Default is 100%, 200% was 32px. Let's make it 125% (20px) instead! */
+    font-size: 20px;
+  }
+}
+
+/* ─── Animation keyframes ──────────────────────────────────── */
+
+@keyframes card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes section-enter {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slot-select-pulse {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(0.91); }
+  100% { transform: scale(0.96); }
+}
+
+/* ─── Animation utilities ─────────────────────────────────── */
+
+.anim-card {
+  animation: card-enter 0.45s var(--ease-out-expo) both;
+  animation-delay: calc(var(--i, 0) * 28ms);
+}
+
+.anim-section {
+  animation: section-enter 0.55s var(--ease-out-expo) both;
+  animation-delay: calc(var(--s, 0) * 90ms);
+}
+
+.anim-pop {
+  animation: pop-in 0.28s var(--ease-out-expo) both;
+}
+
+.anim-slot-select {
+  animation: slot-select-pulse 0.22s var(--ease-out-quart) forwards;
+}
+
+/* Image hover eased with expo curve */
+.img-hover-scale {
+  transition: transform 0.35s var(--ease-out-expo);
+}
+.group:hover .img-hover-scale {
+  transform: scale(1.05);
+}
+
+/* Card shadow eased transition */
+.card-hover-shadow {
+  transition: box-shadow 0.25s var(--ease-out-quart);
+}
+.card-hover-shadow:hover {
+  box-shadow:
+    0 4px 16px oklch(12% 0.013 255 / 0.07),
+    0 1px 4px oklch(12% 0.013 255 / 0.04);
+}
+
+/* ─── Reduced motion ──────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-card,
+  .anim-section,
+  .anim-pop,
+  .anim-slot-select {
+    animation: none;
+  }
+  .img-hover-scale,
+  .card-hover-shadow {
+    transition: none;
   }
 }

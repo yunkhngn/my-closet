@@ -21,24 +21,24 @@ export function OutfitCard({
   );
 
   return (
-    <div className="rounded-lg border border-border/60 bg-card p-3">
-      <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-none">
+    <div className="rounded-xl border border-border/60 bg-card p-4">
+      <div className="flex gap-2.5 overflow-x-auto pb-1 scrollbar-none">
         {ordered.map((ref) => {
           const item = byId.get(ref.itemId);
           return (
-            <div key={`${ref.slot}-${ref.itemId}`} className="w-[88px] shrink-0">
-              <div className="relative aspect-[3/4] overflow-hidden rounded bg-muted">
+            <div key={`${ref.slot}-${ref.itemId}`} className="w-24 shrink-0">
+              <div className="relative aspect-[3/4] overflow-hidden rounded-md bg-muted">
                 {item?.imageUrl && (
                   <Image
                     src={item.imageUrl}
                     alt={item.name}
                     fill
-                    sizes="88px"
+                    sizes="96px"
                     className="object-cover"
                   />
                 )}
               </div>
-              <p className="mt-1 truncate text-center text-[11px] text-muted-foreground/70">
+              <p className="mt-1.5 truncate text-center text-xs text-muted-foreground/70">
                 {SLOT_CONFIG[ref.slot].label}
               </p>
             </div>
@@ -47,11 +47,11 @@ export function OutfitCard({
       </div>
 
       {reason && (
-        <p className="mt-2.5 text-[11px] leading-relaxed text-muted-foreground">{reason}</p>
+        <p className="mt-3 text-[13px] leading-relaxed text-muted-foreground">{reason}</p>
       )}
 
       {footer && (
-        <div className="mt-3 flex gap-2">{footer}</div>
+        <div className="mt-4 flex gap-2">{footer}</div>
       )}
     </div>
   );

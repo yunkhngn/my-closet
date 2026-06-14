@@ -34,9 +34,9 @@ export function SlotPicker({ slot }: { slot: ClothingType }) {
   };
 
   return (
-    <section className="space-y-1.5">
+    <section className="space-y-2">
       <div className="flex items-center justify-between">
-        <h3 className="text-sm font-semibold tracking-tight text-foreground">
+        <h3 className="text-[15px] font-semibold tracking-tight text-foreground">
           {meta.label}
           {meta.required && (
             <span className="ml-1 text-xs text-destructive" aria-label="bắt buộc">*</span>
@@ -46,7 +46,7 @@ export function SlotPicker({ slot }: { slot: ClothingType }) {
           <Button
             variant="ghost"
             size="xs"
-            className="h-6 px-2 text-xs text-muted-foreground/60 hover:text-foreground"
+            className="h-7 px-2 text-xs text-muted-foreground/60 hover:text-foreground"
             onClick={() => clearSlot(slot)}
           >
             Xóa
@@ -55,11 +55,11 @@ export function SlotPicker({ slot }: { slot: ClothingType }) {
       </div>
 
       {items.length === 0 ? (
-        <p className="text-xs italic text-muted-foreground/50">
+        <p className="text-sm italic text-muted-foreground/50">
           Chưa có {meta.label.toLowerCase()} nào.
         </p>
       ) : (
-        <div className="flex gap-2 overflow-x-auto pb-1.5 scrollbar-none snap-x">
+        <div className="flex gap-2.5 overflow-x-auto pb-2 scrollbar-none snap-x">
           {items.map((item) => {
             const isSel = selected.includes(item.id);
             return (
@@ -67,11 +67,14 @@ export function SlotPicker({ slot }: { slot: ClothingType }) {
                 key={item.id}
                 onClick={() => choose(item.id)}
                 className={cn(
-                  'relative h-[90px] w-[68px] shrink-0 snap-start overflow-hidden rounded border-2 transition-all duration-150 active:scale-95',
+                  'relative h-[100px] w-[76px] shrink-0 snap-start overflow-hidden rounded-md border-2 active:scale-[0.93] transition-all duration-200',
                   isSel
-                    ? 'border-foreground shadow-sm ring-1 ring-foreground/15'
-                    : 'border-border/50 hover:border-border',
+                    ? 'border-foreground shadow-md ring-2 ring-foreground/15 scale-[0.96]'
+                    : 'border-border/50 hover:border-border hover:scale-[0.98]',
                 )}
+                style={{
+                  transitionTimingFunction: 'var(--ease-out-expo)',
+                }}
                 title={item.name}
               >
                 <div className="relative h-full w-full bg-muted">
@@ -80,7 +83,7 @@ export function SlotPicker({ slot }: { slot: ClothingType }) {
                       src={item.imageUrl}
                       alt={item.name}
                       fill
-                      sizes="56px"
+                      sizes="76px"
                       className="object-cover"
                     />
                   )}

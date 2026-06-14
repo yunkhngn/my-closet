@@ -15,11 +15,11 @@ export default function OutfitsPage() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="sticky top-0 z-20 flex h-14 items-center justify-between border-b border-border/70 bg-background/95 px-8 backdrop-blur-sm">
+      <header className="sticky top-0 z-20 flex h-16 items-center justify-between border-b border-border/70 bg-background/95 px-8 backdrop-blur-sm">
         <div className="flex items-center gap-3">
-          <h1 className="text-[15px] font-semibold tracking-[-0.01em]">Outfit Đã Lưu</h1>
+          <h1 className="text-[17px] font-semibold tracking-[-0.02em]">Outfit Đã Lưu</h1>
           {!loading && outfits.length > 0 && (
-            <span className="text-xs text-muted-foreground/60">{outfits.length}</span>
+            <span className="text-sm text-muted-foreground/60">{outfits.length}</span>
           )}
         </div>
         <nav className="flex items-center gap-1">
@@ -32,49 +32,54 @@ export default function OutfitsPage() {
         </nav>
       </header>
 
-      <main className="mx-auto w-full max-w-4xl px-8 py-10">
+      <main className="mx-auto w-full max-w-4xl px-8 py-12">
         {loading ? (
-          <div className="flex items-center gap-2 text-[13px] text-muted-foreground">
-            <span className="inline-block h-3 w-3 animate-spin rounded-full border border-muted-foreground/30 border-t-muted-foreground" />
+          <div className="flex items-center gap-3 text-sm text-muted-foreground">
+            <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-muted-foreground/30 border-t-muted-foreground" />
             Đang tải...
           </div>
         ) : outfits.length === 0 ? (
-          <div className="flex flex-col items-center gap-3 py-24 text-center">
-            <p className="text-[13px] text-muted-foreground">Chưa có outfit nào được lưu.</p>
-            <Button variant="outline" size="sm" render={<Link href="/build" />}>
+          <div className="anim-section flex flex-col items-center gap-4 py-32 text-center">
+            <p className="text-[15px] text-muted-foreground">Chưa có outfit nào được lưu.</p>
+            <Button variant="outline" render={<Link href="/build" />}>
               Tạo outfit đầu tiên
             </Button>
           </div>
         ) : (
-          <div className="grid gap-3 sm:grid-cols-2">
-            {outfits.map((o) => {
+          <div className="grid gap-4 sm:grid-cols-2">
+            {outfits.map((o, idx) => {
               const isConfirming = confirmDeleteId === o.id;
               return (
-                <OutfitCard
+                <div
                   key={o.id}
-                  refs={o.items}
-                  reason={[o.occasion, o.source].filter(Boolean).join(' · ')}
-                  footer={
-                    <Button
-                      size="sm"
-                      variant={isConfirming ? 'default' : 'destructive'}
-                      className="h-7 text-[11px] min-w-[72px]"
-                      onClick={() => {
-                        if (isConfirming) {
-                          deleteOutfit(uid, o.id);
-                          setConfirmDeleteId(null);
-                        } else {
-                          setConfirmDeleteId(o.id);
-                        }
-                      }}
-                      onMouseLeave={() => {
-                        if (isConfirming) setConfirmDeleteId(null);
-                      }}
-                    >
-                      {isConfirming ? 'Xác nhận' : 'Xóa'}
-                    </Button>
-                  }
-                />
+                  className="anim-section"
+                  style={{ '--s': idx } as React.CSSProperties}
+                >
+                  <OutfitCard
+                    refs={o.items}
+                    reason={[o.occasion, o.source].filter(Boolean).join(' · ')}
+                    footer={
+                      <Button
+                        size="sm"
+                        variant={isConfirming ? 'default' : 'destructive'}
+                        className="h-8 text-sm min-w-[80px]"
+                        onClick={() => {
+                          if (isConfirming) {
+                            deleteOutfit(uid, o.id);
+                            setConfirmDeleteId(null);
+                          } else {
+                            setConfirmDeleteId(o.id);
+                          }
+                        }}
+                        onMouseLeave={() => {
+                          if (isConfirming) setConfirmDeleteId(null);
+                        }}
+                      >
+                        {isConfirming ? 'Xác nhận' : 'Xóa'}
+                      </Button>
+                    }
+                  />
+                </div>
               );
             })}
           </div>

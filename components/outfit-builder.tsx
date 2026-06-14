@@ -85,92 +85,94 @@ export function OutfitBuilder({ filter }: { filter: Filter }) {
   return (
     <div className="space-y-8">
       {/* Slot selection */}
-      <div className="rounded-lg border border-border/60 bg-card px-5 py-5 space-y-5">
+      <div className="rounded-xl border border-border/60 bg-card px-6 py-6 space-y-6">
         <div className="flex items-center justify-between">
-          <h2 className="text-xs font-semibold uppercase tracking-[0.08em] text-muted-foreground">
+          <h2 className="text-[13px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
             Ngăn Tủ Đồ
           </h2>
           <Button
             variant="outline"
             size="sm"
-            className="h-8 text-sm"
+            className="h-9 px-4 text-sm"
             disabled={!manualComplete || isSaving}
             onClick={() => save(manualRefs, 'manual')}
           >
             {isSaving ? 'Đang lưu…' : 'Lưu outfit này'}
           </Button>
         </div>
-        <div className="space-y-4">
+        <div className="space-y-5">
           {CLOTHING_TYPES.map((slot) => (
             <SlotPicker key={slot} slot={slot} />
           ))}
         </div>
+        {saved && (
+          <p className="anim-pop text-sm font-medium text-emerald-600">{saved}</p>
+        )}
       </div>
 
       {/* AI section */}
-      <div className="space-y-3">
-        <div className="flex items-center gap-3">
-          <h2 className="text-xs font-semibold uppercase tracking-[0.08em] text-muted-foreground">
-            Gợi ý phong cách & Dịp
-          </h2>
-        </div>
+      <div className="space-y-4">
+        <h2 className="text-[13px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
+          Gợi ý phong cách & Dịp
+        </h2>
         <Textarea
           placeholder="Tùy chọn: mô tả phong cách, cảm giác hoặc dịp cụ thể (vd: 'lịch sự nhẹ cho buổi cà phê')"
           value={context}
           onChange={(e) => setContext(e.target.value)}
           rows={2}
-          className="text-[13px] resize-none"
+          className="text-sm resize-none"
         />
         {aiNote && (
-          <p className="text-[12px] text-amber-600 font-medium animate-in fade-in duration-200">{aiNote}</p>
+          <p className="anim-pop text-sm text-amber-600 font-medium">{aiNote}</p>
         )}
-        <div className="flex flex-wrap items-center gap-2">
-          <Button onClick={quickSuggest} variant="outline" size="sm" className="h-9 px-4 text-sm">
+        <div className="flex flex-wrap items-center gap-2.5">
+          <Button onClick={quickSuggest} variant="outline" size="sm" className="h-9 px-5 text-sm">
             Gợi ý nhanh
           </Button>
-          <Button variant="default" size="sm" className="h-9 px-4 text-sm" onClick={askAi} disabled={aiBusy}>
+          <Button variant="default" size="sm" className="h-9 px-5 text-sm" onClick={askAi} disabled={aiBusy}>
             {aiBusy ? 'Đang hỏi AI…' : 'Hỏi AI'}
           </Button>
         </div>
       </div>
 
-      {saved && (
-        <p className="text-[12px] font-medium text-emerald-600 animate-in fade-in duration-200">{saved}</p>
-      )}
-
       {/* Suggestions */}
       {suggestions.length > 0 && (
-        <div className="space-y-4">
-          <h2 className="text-xs font-semibold uppercase tracking-[0.08em] text-muted-foreground">
+        <div className="space-y-5">
+          <h2 className="text-[13px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
             Gợi ý
           </h2>
-          <div className="grid gap-3 sm:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-2">
             {suggestions.map((s, i) => (
-              <OutfitCard
+              <div
                 key={i}
-                refs={s.items}
-                reason={s.reason ?? `Điểm phù hợp ${(s.score * 100).toFixed(0)}%`}
-                footer={
-                  <div className="flex gap-2">
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="h-7 text-[11px]"
-                      onClick={() => loadRefs(s.items)}
-                    >
-                      Chỉnh sửa
-                    </Button>
-                    <Button
-                      size="sm"
-                      variant="secondary"
-                      className="h-7 text-[11px]"
-                      onClick={() => save(s.items, s.reason ? 'ai' : 'algo')}
-                    >
-                      Lưu
-                    </Button>
-                  </div>
-                }
-              />
+                className="anim-section"
+                style={{ '--s': i } as React.CSSProperties}
+              >
+                <OutfitCard
+                  refs={s.items}
+                  reason={s.reason ?? `Điểm phù hợp ${(s.score * 100).toFixed(0)}%`}
+                  footer={
+                    <div className="flex gap-2">
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="h-8 text-sm"
+                        onClick={() => loadRefs(s.items)}
+                      >
+                        Chỉnh sửa
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="secondary"
+                        className="h-8 text-sm"
+                        onClick={() => save(s.items, s.reason ? 'ai' : 'algo')}
+                      >
+                        Lưu
+                      </Button>
+                    </div>
+                  }
+                />
+              </div>
             ))}
           </div>
         </div>

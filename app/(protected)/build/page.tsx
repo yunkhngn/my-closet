@@ -12,10 +12,8 @@ export default function BuildPage() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="sticky top-0 z-20 flex h-14 items-center justify-between border-b border-border/70 bg-background/95 px-8 backdrop-blur-sm">
-        <div className="flex items-center gap-3">
-          <h1 className="text-[15px] font-semibold tracking-[-0.01em]">Tạo Trang Phục</h1>
-        </div>
+      <header className="sticky top-0 z-20 flex h-16 items-center justify-between border-b border-border/70 bg-background/95 px-8 backdrop-blur-sm">
+        <h1 className="text-[17px] font-semibold tracking-[-0.02em]">Tạo Trang Phục</h1>
         <nav className="flex items-center gap-1">
           <Button variant="ghost" size="sm" render={<Link href="/" />} className="text-muted-foreground/70 hover:text-foreground">
             Tủ Đồ
@@ -26,7 +24,7 @@ export default function BuildPage() {
         </nav>
       </header>
 
-      <main className="mx-auto w-full max-w-3xl px-8 py-10 space-y-6">
+      <main className="mx-auto w-full max-w-3xl px-8 py-12 space-y-6">
         <FilterBar filter={filter} onChange={setFilter} />
         <OutfitBuilder filter={filter} />
       </main>
