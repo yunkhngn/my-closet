@@ -17,7 +17,7 @@ const app: FirebaseApp = getApps().length ? getApp() : initializeApp(firebaseCon
 export const auth: Auth = getAuth(app);
 export const db: Firestore = getFirestore(app);
 
-if ((process.env.NODE_ENV === 'development' || process.env.NEXT_PUBLIC_USE_FIREBASE_EMULATOR === 'true') && typeof window !== 'undefined') {
+if (process.env.NODE_ENV === 'development' && typeof window !== 'undefined') {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const g = window as any;
   if (!g._firebaseEmulatorsConnected) {
