@@ -19,7 +19,8 @@ export default function ProtectedLayout({
         router.replace('/signin');
       } else {
         const allowedEmail = process.env.NEXT_PUBLIC_ALLOW_EMAIL;
-        if (allowedEmail && user.email !== allowedEmail) {
+        const isAllowed = !allowedEmail || allowedEmail.split(',').map(e => e.trim().toLowerCase()).includes(user.email?.toLowerCase() || '');
+        if (!isAllowed) {
           import('@/lib/auth-actions').then(({ signOut }) => {
             signOut();
             router.replace('/signin?error=unauthorized');
@@ -38,7 +39,8 @@ export default function ProtectedLayout({
   }
 
   const allowedEmail = process.env.NEXT_PUBLIC_ALLOW_EMAIL;
-  if (!user || (allowedEmail && user.email !== allowedEmail)) return null;
+  const isAllowed = !allowedEmail || allowedEmail.split(',').map(e => e.trim().toLowerCase()).includes(user?.email?.toLowerCase() || '');
+  if (!user || !isAllowed) return null;
 
   return <ItemsProvider>{children}</ItemsProvider>;
 }

@@ -8,7 +8,7 @@ const runtimeCaching = defaultRuntimeCaching.filter(
 
 const withPWA = withPWAInit({
   dest: 'public',
-  disable: process.env.NODE_ENV === 'development',
+  disable: true, // Disabled to resolve Next.js 14 App Router compatibility issues
   register: true,
   skipWaiting: true,
   runtimeCaching,
@@ -24,4 +24,4 @@ const nextConfig = {
   },
 };
 
-export default withPWA(nextConfig);
+export default nextConfig;

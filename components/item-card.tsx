@@ -67,7 +67,7 @@ export function ItemCard({ item }: { item: Item }) {
               Xác nhận xóa
             </DialogTitle>
             <DialogDescription className="text-[13px] text-muted-foreground/90 mt-1">
-              Bạn có chắc chắn muốn xóa <strong>"{item.name}"</strong>? Hành động này không thể hoàn tác.
+              Bạn có chắc chắn muốn xóa <strong>&ldquo;{item.name}&rdquo;</strong>? Hành động này không thể hoàn tác.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter className="mt-4 flex gap-2">

@@ -21,7 +21,8 @@ export default function SignInPage() {
   useEffect(() => {
     if (!loading && user) {
       const allowedEmail = process.env.NEXT_PUBLIC_ALLOW_EMAIL;
-      if (!allowedEmail || user.email === allowedEmail) {
+      const isAllowed = !allowedEmail || allowedEmail.split(',').map(e => e.trim().toLowerCase()).includes(user.email?.toLowerCase() || '');
+      if (isAllowed) {
         router.replace('/');
       }
     }

@@ -16,14 +16,29 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: 'Tủ Quần Áo',
-  description: 'Số hóa tủ quần áo cá nhân + gợi ý trang phục',
+  title: {
+    default: 'My Closet — Tủ đồ AI & Gợi ý Trang phục Cá nhân',
+    template: '%s | My Closet'
+  },
+  description: 'Số hóa tủ quần áo cá nhân, quản lý quần áo thông minh và tự động gợi ý phối đồ hàng ngày bằng trí tuệ nhân tạo (AI).',
+  keywords: ['tủ quần áo online', 'quản lý tủ đồ', 'gợi ý phối đồ AI', 'phối đồ thông minh', 'closet manager', 'AI fashion'],
+  authors: [{ name: 'My Closet Team' }],
   manifest: '/manifest.json',
-  appleWebApp: { capable: true, title: 'Tủ Quần Áo', statusBarStyle: 'default' },
+  appleWebApp: {
+    capable: true,
+    title: 'My Closet',
+    statusBarStyle: 'default',
+  },
+  openGraph: {
+    title: 'My Closet — Tủ đồ AI & Gợi ý Trang phục',
+    description: 'Số hóa tủ quần áo cá nhân và gợi ý trang phục thông minh hàng ngày.',
+    type: 'website',
+    locale: 'vi_VN',
+  },
 };
 
 export const viewport: Viewport = {
-  themeColor: '#ffffff',
+  themeColor: '#fcfbf7', // Matches the Washi paper background color --background oklch
 };
 
 export default function RootLayout({
