@@ -26,11 +26,11 @@ export default function HomePage() {
   };
 
   return (
-    <main className="mx-auto max-w-5xl p-6">
-      <header className="flex items-center justify-between">
-        <h1 className="text-xl font-semibold">Tủ Đồ Của Tôi</h1>
-        <div className="flex items-center gap-3 text-sm">
-          <span className="hidden text-muted-foreground sm:inline">
+    <div className="flex min-h-screen flex-col">
+      <header className="sticky top-0 z-20 flex h-14 items-center justify-between border-b border-border/70 bg-background/95 px-8 backdrop-blur-sm">
+        <h1 className="text-[15px] font-semibold tracking-[-0.01em]">Tủ Đồ</h1>
+        <nav className="flex items-center gap-1">
+          <span className="mr-3 hidden text-sm text-muted-foreground/70 sm:block">
             {user?.displayName}
           </span>
           <Button variant="ghost" size="sm" render={<Link href="/build" />}>
@@ -39,16 +39,26 @@ export default function HomePage() {
           <Button variant="ghost" size="sm" render={<Link href="/outfits" />}>
             Đã Lưu
           </Button>
-          <ItemForm trigger={<Button size="sm">Thêm đồ</Button>} />
-          <Button variant="outline" size="sm" onClick={handleSeed} disabled={seeding}>
-            {seeding ? 'Đang thêm mẫu...' : 'Thêm mẫu'}
+          <div className="mx-1 h-4 w-px bg-border" />
+          <ItemForm trigger={<Button size="sm">+ Thêm đồ</Button>} />
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={handleSeed}
+            disabled={seeding}
+            className="text-muted-foreground/60 hover:text-muted-foreground"
+          >
+            {seeding ? '…' : 'Mẫu'}
           </Button>
-          <Button variant="outline" size="sm" onClick={() => signOut()}>
-            Đăng xuất
+          <Button variant="ghost" size="sm" onClick={() => signOut()} className="text-muted-foreground/60 hover:text-muted-foreground">
+            Thoát
           </Button>
-        </div>
+        </nav>
       </header>
-      <ClosetGrid />
-    </main>
+
+      <main className="mx-auto w-full max-w-7xl px-8 py-10">
+        <ClosetGrid />
+      </main>
+    </div>
   );
 }

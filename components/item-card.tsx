@@ -11,32 +11,35 @@ export function ItemCard({ item }: { item: Item }) {
   const uid = useAuthStore((s) => s.user!.uid);
 
   return (
-    <div className="group relative overflow-hidden rounded-lg border transition-transform active:scale-[0.98] bg-card text-card-foreground">
-      <div className="relative aspect-square bg-muted">
+    <div className="group relative overflow-hidden rounded-md border border-border/60 bg-card transition-shadow duration-200 hover:shadow-md hover:shadow-foreground/5">
+      <div className="relative aspect-[3/4] overflow-hidden bg-muted">
         {item.imageUrl && (
           <Image
             src={item.imageUrl}
             alt={item.name}
             fill
-            sizes="(max-width:768px) 50vw, 200px"
-            className="object-cover"
+            sizes="(max-width: 640px) 33vw, (max-width: 1024px) 20vw, 180px"
+            className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
           />
         )}
       </div>
-      <div className="flex items-center justify-between gap-2 p-2">
-        <span className="truncate text-sm font-medium">{item.name}</span>
-        <div className="flex gap-1 opacity-0 transition-opacity group-hover:opacity-100">
+
+      <div className="flex items-center justify-between gap-1 px-3 py-2.5">
+        <span className="truncate text-[13px] font-medium leading-tight text-foreground">
+          {item.name}
+        </span>
+        <div className="flex shrink-0 items-center gap-0.5 opacity-0 transition-opacity duration-150 group-hover:opacity-100">
           <ItemForm
             existing={item}
             trigger={
-              <Button variant="ghost" size="sm" className="h-7 px-2 text-xs">
+              <Button variant="ghost" size="xs" className="h-7 px-2 text-xs">
                 Sửa
               </Button>
             }
           />
           <Button
             variant="ghost"
-            size="sm"
+            size="xs"
             className="h-7 px-2 text-xs text-destructive hover:text-destructive"
             onClick={() => {
               if (confirm(`Xóa "${item.name}"?`)) deleteItem(uid, item.id);

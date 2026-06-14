@@ -11,24 +11,25 @@ export default function BuildPage() {
   const [filter, setFilter] = useState<Filter>({});
 
   return (
-    <main className="mx-auto max-w-3xl space-y-6 p-6">
-      <header className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight">Tạo Trang Phục</h1>
-          <p className="text-sm text-muted-foreground mt-1">Kết hợp các vị trí hoặc tạo gợi ý trang phục.</p>
+    <div className="flex min-h-screen flex-col">
+      <header className="sticky top-0 z-20 flex h-14 items-center justify-between border-b border-border/70 bg-background/95 px-8 backdrop-blur-sm">
+        <div className="flex items-center gap-3">
+          <h1 className="text-[15px] font-semibold tracking-[-0.01em]">Tạo Trang Phục</h1>
         </div>
-        <div className="flex gap-2 text-sm">
-          <Button variant="outline" size="sm" render={<Link href="/" />}>
+        <nav className="flex items-center gap-1">
+          <Button variant="ghost" size="sm" render={<Link href="/" />} className="text-muted-foreground/70 hover:text-foreground">
             Tủ Đồ
           </Button>
-          <Button variant="outline" size="sm" render={<Link href="/outfits" />}>
+          <Button variant="ghost" size="sm" render={<Link href="/outfits" />} className="text-muted-foreground/70 hover:text-foreground">
             Đã Lưu
           </Button>
-        </div>
+        </nav>
       </header>
 
-      <FilterBar filter={filter} onChange={setFilter} />
-      <OutfitBuilder filter={filter} />
-    </main>
+      <main className="mx-auto w-full max-w-3xl px-8 py-10 space-y-6">
+        <FilterBar filter={filter} onChange={setFilter} />
+        <OutfitBuilder filter={filter} />
+      </main>
+    </div>
   );
 }

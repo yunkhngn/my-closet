@@ -71,20 +71,26 @@ export function ItemForm({
     }
   }
 
+  const fieldClass = 'h-8 text-[13px]';
+  const selectClass =
+    'h-8 w-full rounded-md border border-input bg-background px-2.5 text-[13px] text-foreground transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring';
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger render={trigger} />
-      <DialogContent className="max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>{existing ? 'Chỉnh sửa đồ' : 'Thêm đồ'}</DialogTitle>
+          <DialogTitle className="text-[14px]">
+            {existing ? 'Chỉnh sửa đồ' : 'Thêm đồ mới'}
+          </DialogTitle>
         </DialogHeader>
 
-        <div className="grid gap-4 py-2">
+        <div className="grid gap-3.5 py-1">
           <div className="grid gap-1.5">
-            <Label htmlFor="type">Loại</Label>
+            <Label htmlFor="type" className="text-[12px] text-muted-foreground">Loại</Label>
             <select
               id="type"
-              className="h-9 rounded-md border px-2 text-sm bg-background text-foreground"
+              className={selectClass}
               value={draft.type}
               onChange={(e) =>
                 setDraft({ ...draft, type: e.target.value as ItemDraft['type'] })
@@ -99,30 +105,59 @@ export function ItemForm({
           </div>
 
           <div className="grid gap-1.5">
-            <Label htmlFor="name">Tên</Label>
+            <Label htmlFor="name" className="text-[12px] text-muted-foreground">Tên</Label>
             <Input
               id="name"
+              className={fieldClass}
               value={draft.name}
               onChange={(e) => setDraft({ ...draft, name: e.target.value })}
+              placeholder="vd: Áo sơ mi trắng Oxford"
             />
           </div>
 
-          <div className="grid gap-1.5">
-            <Label htmlFor="colors">Màu sắc (phân cách bằng dấu phẩy)</Label>
-            <Input
-              id="colors"
-              defaultValue={draft.colors.join(', ')}
-              onChange={(e) =>
-                setDraft({ ...draft, colors: parseTagList(e.target.value) })
-              }
-            />
+          <div className="grid grid-cols-2 gap-3">
+            <div className="grid gap-1.5">
+              <Label htmlFor="colors" className="text-[12px] text-muted-foreground">
+                Màu sắc
+              </Label>
+              <Input
+                id="colors"
+                className={fieldClass}
+                defaultValue={draft.colors.join(', ')}
+                placeholder="trắng, xanh…"
+                onChange={(e) =>
+                  setDraft({ ...draft, colors: parseTagList(e.target.value) })
+                }
+              />
+            </div>
+
+            <div className="grid gap-1.5">
+              <Label htmlFor="formality" className="text-[12px] text-muted-foreground">
+                Trang trọng (1–5)
+              </Label>
+              <Input
+                id="formality"
+                className={fieldClass}
+                type="number"
+                min={1}
+                max={5}
+                value={draft.formality}
+                onChange={(e) =>
+                  setDraft({ ...draft, formality: Number(e.target.value) })
+                }
+              />
+            </div>
           </div>
 
           <div className="grid gap-1.5">
-            <Label htmlFor="style">Thẻ phong cách (phân cách bằng dấu phẩy)</Label>
+            <Label htmlFor="style" className="text-[12px] text-muted-foreground">
+              Thẻ phong cách
+            </Label>
             <Input
               id="style"
+              className={fieldClass}
               defaultValue={draft.styleTags.join(', ')}
+              placeholder="casual, minimalist, streetwear…"
               onChange={(e) =>
                 setDraft({ ...draft, styleTags: parseTagList(e.target.value) })
               }
@@ -130,24 +165,14 @@ export function ItemForm({
           </div>
 
           <div className="grid gap-1.5">
-            <Label htmlFor="formality">Mức độ trang trọng (1–5)</Label>
-            <Input
-              id="formality"
-              type="number"
-              min={1}
-              max={5}
-              value={draft.formality}
-              onChange={(e) =>
-                setDraft({ ...draft, formality: Number(e.target.value) })
-              }
-            />
-          </div>
-
-          <div className="grid gap-1.5">
-            <Label htmlFor="occasions">Dịp (tùy chọn, phân cách bằng dấu phẩy)</Label>
+            <Label htmlFor="occasions" className="text-[12px] text-muted-foreground">
+              Dịp <span className="font-normal text-muted-foreground/60">(tùy chọn)</span>
+            </Label>
             <Input
               id="occasions"
+              className={fieldClass}
               defaultValue={(draft.occasions ?? []).join(', ')}
+              placeholder="đi làm, đi chơi, hẹn hò…"
               onChange={(e) =>
                 setDraft({ ...draft, occasions: parseTagList(e.target.value) })
               }
@@ -155,9 +180,12 @@ export function ItemForm({
           </div>
 
           <div className="grid gap-1.5">
-            <Label htmlFor="image">Hình ảnh</Label>
+            <Label htmlFor="image" className="text-[12px] text-muted-foreground">
+              Hình ảnh {existing && <span className="font-normal text-muted-foreground/60">(để trống = giữ nguyên)</span>}
+            </Label>
             <Input
               id="image"
+              className={fieldClass}
               type="file"
               accept="image/*"
               capture="environment"
@@ -165,9 +193,13 @@ export function ItemForm({
             />
           </div>
 
-          {error && <p className="text-sm text-red-600">{error}</p>}
+          {error && (
+            <p className="rounded-md bg-destructive/8 px-3 py-2 text-[12px] text-destructive">
+              {error}
+            </p>
+          )}
 
-          <Button onClick={handleSave} disabled={busy}>
+          <Button onClick={handleSave} disabled={busy} className="mt-1 h-8 text-[13px]">
             {busy ? 'Đang lưu…' : 'Lưu'}
           </Button>
         </div>

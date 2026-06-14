@@ -16,32 +16,43 @@ export function OutfitCard({
   const items = useItemsStore((s) => s.items);
   const byId = new Map(items.map((i) => [i.id, i]));
 
-  // Render in canonical slot order: Outerwear · Top · Bottom · Shoes · Accessory
   const ordered = CLOTHING_TYPES.flatMap((slot) =>
     refs.filter((r) => r.slot === slot),
   );
 
   return (
-    <div className="rounded-lg border p-3 bg-card text-card-foreground">
-      <div className="flex gap-2 overflow-x-auto pb-1">
+    <div className="rounded-lg border border-border/60 bg-card p-3">
+      <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-none">
         {ordered.map((ref) => {
           const item = byId.get(ref.itemId);
           return (
-            <div key={`${ref.slot}-${ref.itemId}`} className="w-20 shrink-0">
-              <div className="relative aspect-square overflow-hidden rounded-md bg-muted">
+            <div key={`${ref.slot}-${ref.itemId}`} className="w-[88px] shrink-0">
+              <div className="relative aspect-[3/4] overflow-hidden rounded bg-muted">
                 {item?.imageUrl && (
-                  <Image src={item.imageUrl} alt={item.name} fill sizes="80px" className="object-cover" />
+                  <Image
+                    src={item.imageUrl}
+                    alt={item.name}
+                    fill
+                    sizes="88px"
+                    className="object-cover"
+                  />
                 )}
               </div>
-              <p className="mt-1 truncate text-[11px] text-muted-foreground text-center">
+              <p className="mt-1 truncate text-center text-[11px] text-muted-foreground/70">
                 {SLOT_CONFIG[ref.slot].label}
               </p>
             </div>
           );
         })}
       </div>
-      {reason && <p className="mt-2 text-xs text-muted-foreground">{reason}</p>}
-      {footer && <div className="mt-3 flex gap-2">{footer}</div>}
+
+      {reason && (
+        <p className="mt-2.5 text-[11px] leading-relaxed text-muted-foreground">{reason}</p>
+      )}
+
+      {footer && (
+        <div className="mt-3 flex gap-2">{footer}</div>
+      )}
     </div>
   );
 }
